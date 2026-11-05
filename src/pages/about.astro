@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import photo from '../assets/geoff-about.jpg';
+---
+
+<Base title="About">
+  <article class="prose">
+    <h1>Hey, I'm Geoff</h1>
+    <p>I'm a front-end developer in Hamilton, Ontario.</p>
+
+    <Image src={photo} alt="Geoff Jamieson" widths={[480, 960]} sizes="(min-width: 720px) 480px, 100vw" />
+
+    <h2>Koji Street</h2>
+    <p>
+      I studied commerce at the University of Windsor, with a semester abroad in Sweden. After
+      graduating, I founded Koji Street, a marketplace connecting artists with people who wanted to
+      buy their original work. I did almost everything myself. I designed the product and the brand,
+      interviewed users, ran our social media and ads, and grew it to about 250 users in six months.
+    </p>
+    <p>
+      The one thing I didn't do was build it. An outside development team wrote the code, and
+      depending on someone else to get the details right frustrated me. So I decided that whatever I
+      made next, I'd be able to build myself.
+    </p>
+
+    <h2>Teaching myself to code</h2>
+    <p>
+      I started with freeCodeCamp and React, then went deeper into plain JavaScript, working through
+      most of a book on building a front-end framework from scratch. Somewhere along the way I
+      realized I really liked it. I like digging in and picking up new skills, and I like seeing the
+      output of my input. I joined a Chingu team project, building a React app with four other
+      people, and soon after started my first developer role.
+    </p>
+
+    <h2>LCube Studios</h2>
+    <p>
+      I spent two and a half years at LCube Studios, a small design and development agency. I was
+      the main developer on Giving Gap, a nonprofit platform, where I rebuilt the whole website on a
+      modern stack, and I built tools for other clients and for the agency itself. I picked up Vue
+      and Nuxt on the job, and kept taking on more of the stack, up to shipping a full-stack AI app.
+    </p>
+
+    <h2>What I care about</h2>
+    <p>
+      I care about the product as much as the code, including who it's for, what problem it solves,
+      and whether it's working. I want to build cool things that help people. I take ownership of
+      what I build, and I document it so the next person can pick it up. I use AI every day, with my
+      own judgment in charge.
+    </p>
+    <p>
+      What I want next is a team that cares about what it's building and the people using it, where
+      I can keep learning and keep building across the stack.
+    </p>
+
+    <h2>Outside of work</h2>
+    <p>
+      Some of the things I like doing are hiking, rock climbing, cooking, reading, and playing old
+      video games. I listen to a lot of music and collect CDs and vinyl. I also like working on fun
+      coding side projects.
+    </p>
+    <p>
+      Right now I'm building a music visualizer for fun. It's a music player for my own library,
+      running on an HTTP server I'm writing from scratch in TypeScript to learn how servers work
+      under the hood. Eventually it'll show visuals that react to the music, inspired by the look of
+      2000s players like Winamp. It's not done yet, but it'll be up here when it is.
+    </p>
+  </article>
+</Base>

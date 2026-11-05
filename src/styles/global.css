@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/*
+  Placeholder styles only: readable defaults until the design direction is chosen.
+  Everything visual here is expected to be replaced.
+*/
+
+@layer base {
+  body {
+    @apply mx-auto max-w-2xl px-4 py-8 font-sans leading-relaxed text-neutral-900 bg-white;
+  }
+  a {
+    @apply underline underline-offset-2;
+  }
+  h1 {
+    @apply text-3xl font-bold mb-4;
+  }
+  h2 {
+    @apply text-xl font-semibold mt-10 mb-3;
+  }
+  h3 {
+    @apply font-semibold;
+  }
+  p,
+  ul {
+    @apply mb-4;
+  }
+  img,
+  video {
+    @apply w-full h-auto my-6 rounded border border-neutral-200;
+  }
+}
+
+@layer components {
+  .skip-link {
+    @apply sr-only focus:not-sr-only;
+  }
+  .site-header {
+    @apply flex flex-wrap items-center justify-between gap-4 mb-12;
+  }
+  .site-footer {
+    @apply mt-16 pt-2 border-t border-neutral-200;
+  }
+  .subheader {
+    @apply text-xl text-neutral-700;
+  }
+  .site-header ul,
+  .contact-links {
+    @apply flex flex-wrap gap-4 mb-0;
+  }
+  .site-name {
+    @apply font-semibold no-underline;
+  }
+  .actions {
+    @apply flex gap-4;
+  }
+  .work-list {
+    @apply grid gap-6;
+  }
+  .work-list a {
+    @apply block no-underline;
+  }
+  .stack,
+  .tagline {
+    @apply text-neutral-600;
+  }
+  .meta {
+    @apply grid gap-1 text-sm;
+  }
+  .meta div {
+    @apply flex gap-2;
+  }
+  .meta dt {
+    @apply font-semibold;
+  }
+  .prose ul {
+    @apply list-disc pl-6;
+  }
+  .prose li {
+    @apply mb-2;
+  }
+}

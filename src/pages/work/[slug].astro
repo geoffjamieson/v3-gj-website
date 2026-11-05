@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const caseStudies = await getCollection('case-studies');
+  return caseStudies.map((study) => ({ params: { slug: study.id }, props: { study } }));
+}
+
+const { study } = Astro.props;
+const { title, tagline, role, dates, stack, links, heroVideo } = study.data;
+const { Content } = await render(study);
+---
+
+<Base title={title} description={tagline}>
+  <article class="prose">
+    <header class="case-header">
+      <h1>{title}</h1>
+      <p class="tagline">{tagline}</p>
+      <dl class="meta">
+        <div><dt>Role</dt><dd>{role}</dd></div>
+        <div><dt>When</dt><dd>{dates}</dd></div>
+        <div><dt>Stack</dt><dd>{stack.join(', ')}</dd></div>
+        {
+          links.length > 0 && (
+            <div>
+              <dt>Links</dt>
+              <dd>
+                {links.map((link, i) => (
+                  <>
+                    {i > 0 && ' · '}
+                    <a href={link.url}>{link.label}</a>
+                  </>
+                ))}
+              </dd>
+            </div>
+          )
+        }
+      </dl>
+    </header>
+
+    {
+      heroVideo && (
+        <video src={heroVideo} controls muted playsinline preload="metadata" aria-label={`${title} walkthrough`} />
+      )
+    }
+
+    <Content />
+  </article>
+</Base>

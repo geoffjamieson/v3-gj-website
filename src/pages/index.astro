@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const caseStudies = (await getCollection('case-studies')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Base>
+  <section class="intro">
+    <h1>Hey, I'm Geoff.</h1>
+    <!-- Placeholder copy, to revisit once the design is in place -->
+    <p class="subheader">Front-end developer.</p>
+    <p>
+      I like making things. Lately I've been picking up more of the back end, because the more of
+      the stack I know, the more I can build on my own. I started out as a founder, so I care about
+      the product as much as the code.
+    </p>
+    <p class="actions">
+      <a href="#work">See my work</a>
+      <a href="#contact">Get in touch</a>
+    </p>
+  </section>
+
+  <section id="work" aria-labelledby="work-heading">
+    <h2 id="work-heading">Work</h2>
+    <ul class="work-list">
+      {
+        caseStudies.map((study) => (
+          <li>
+            <a href={`/work/${study.id}`}>
+              <h3>{study.data.title}</h3>
+              <p>{study.data.tagline}</p>
+              <p class="stack">{study.data.homeStack.join(' · ')}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section aria-labelledby="about-heading">
+    <h2 id="about-heading">About</h2>
+    <p>
+      I came to development from a non-traditional background. Instead of a computer science
+      degree, I studied business and started an art marketplace, then taught myself to code so I
+      could build my own ideas. I like digging in, learning new things, and building things.
+    </p>
+    <p>
+      Outside of work, I like hiking, rock climbing, cooking, listening to music, and collecting CDs
+      and vinyl.
+    </p>
+    <p><a href="/about">More about me</a></p>
+  </section>
+</Base>
