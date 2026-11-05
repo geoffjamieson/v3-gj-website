@@ -47,6 +47,16 @@
   }
   a {
     @apply underline underline-offset-2;
+    text-decoration-thickness: 1px;
+    transition:
+      text-decoration-color 0.2s,
+      text-decoration-thickness 0.2s;
+  }
+  /* On hover or keyboard focus the underline (not the text, which some logo colours would make
+     hard to read) takes on the visitor's logo colour */
+  a:is(:hover, :focus-visible) {
+    text-decoration-color: var(--logo-color);
+    text-decoration-thickness: 2px;
   }
   h1,
   h2,
