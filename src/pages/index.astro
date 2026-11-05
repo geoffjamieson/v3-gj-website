@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
 
 const caseStudies = (await getCollection('case-studies')).sort(
   (a, b) => a.data.order - b.data.order,
@@ -48,8 +49,8 @@ const caseStudies = (await getCollection('case-studies')).sort(
       could build my own ideas. I like digging in, learning new things, and building things.
     </p>
     <p>
-      Outside of work, I like hiking, rock climbing, cooking, listening to music, and collecting CDs
-      and vinyl.
+      Outside of work, I like hiking, rock climbing, cooking, <a href={site.storygraph}>reading</a>,
+      listening to <a href={site.bandcamp}>music</a>, and collecting CDs and vinyl.
     </p>
     <p><a href="/about">More about me</a></p>
   </section>

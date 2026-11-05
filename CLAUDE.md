@@ -12,6 +12,7 @@ Geoff Jamieson's portfolio, built with Astro and Tailwind. It replaces v2 (`~/Co
 - `src/content/case-studies/*.md`: the four case studies (frontmatter holds the header; `order` sets the Work list order). They follow `docs/case-study-outline.md`.
 - `src/pages/index.astro` and `src/pages/about.astro`: home and About copy, written directly in the page.
 - `src/data/site.ts`: email and profile links.
+- `src/components/logo/`: the gj logo (Kilo's g and j, softly inflated, springs into a stacked layout on hover) and the button that lets visitors change its colour. `src/components/ThemeToggle.astro` is the light/dark toggle; colours are tokens at the top of `src/styles/global.css`. Both choices are saved in localStorage and applied before paint by the inline script in `Base.astro`.
 - `src/assets/`: images (optimised by Astro). `public/videos/<slug>/`: videos, served as is.
 - No resume on the site (Geoff's call, 2026-11-05). The case studies and About cover it, and LinkedIn has the timeline.
 - This repo is the home of the portfolio copy and assets. They came from `~/Documents/career/portfolio/` and `case-study-assets/`, and the career project should read portfolio info from here.

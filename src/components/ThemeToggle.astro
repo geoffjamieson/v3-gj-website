@@ -1,0 +1,63 @@
+---
+// Switches between light and dark. Starts from the visitor's system setting; once they choose,
+// their choice is remembered (applied before paint by the inline script in Base.astro).
+---
+
+<button type="button" class="theme-toggle" aria-label="Dark mode" aria-pressed="false">
+  <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" /></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="4.5"></circle>
+    <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"></path>
+  </svg>
+</button>
+
+<style is:global>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  /* Show the moon in light mode (switch to dark) and the sun in dark mode */
+  .theme-toggle .icon-sun,
+  .theme-toggle[aria-pressed='true'] .icon-moon {
+    display: none;
+  }
+  .theme-toggle[aria-pressed='true'] .icon-sun {
+    display: block;
+  }
+</style>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+  const root = document.documentElement;
+  const systemDark = matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : systemDark.matches);
+  const sync = () => button?.setAttribute('aria-pressed', String(isDark()));
+
+  button?.addEventListener('click', () => {
+    const theme = isDark() ? 'light' : 'dark';
+    root.dataset.theme = theme;
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {}
+    sync();
+  });
+  systemDark.addEventListener('change', sync);
+  sync();
+</script>

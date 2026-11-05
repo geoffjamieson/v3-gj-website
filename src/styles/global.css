@@ -5,9 +5,37 @@
   Everything visual here is expected to be replaced.
 */
 
+/* Colour tokens. Dark follows the system setting unless the visitor picks one with the toggle. */
+:root {
+  --bg: #ffffff;
+  --text: #171717;
+  --muted: #525252;
+  --border: #e5e5e5;
+  --logo-color: #ff4f9a;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0f0f10;
+    --text: #f2f2ef;
+    --muted: #a3a3a3;
+    --border: #2e2e2e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #0f0f10;
+  --text: #f2f2ef;
+  --muted: #a3a3a3;
+  --border: #2e2e2e;
+  color-scheme: dark;
+}
+
 @layer base {
   body {
-    @apply mx-auto max-w-2xl px-4 py-8 font-sans leading-relaxed text-neutral-900 bg-white;
+    @apply mx-auto max-w-2xl px-4 py-8 font-sans leading-relaxed;
+    background: var(--bg);
+    color: var(--text);
   }
   a {
     @apply underline underline-offset-2;
@@ -27,7 +55,8 @@
   }
   img,
   video {
-    @apply w-full h-auto my-6 rounded border border-neutral-200;
+    @apply w-full h-auto my-6 rounded border;
+    border-color: var(--border);
   }
 }
 
@@ -39,10 +68,16 @@
     @apply flex flex-wrap items-center justify-between gap-4 mb-12;
   }
   .site-footer {
-    @apply mt-16 pt-2 border-t border-neutral-200;
+    @apply mt-16 pt-2 border-t;
+    border-color: var(--border);
   }
   .subheader {
-    @apply text-xl text-neutral-700;
+    @apply text-xl;
+    color: var(--muted);
+  }
+  .brand,
+  .header-end {
+    @apply flex items-center gap-4;
   }
   .site-header ul,
   .contact-links {
@@ -62,7 +97,7 @@
   }
   .stack,
   .tagline {
-    @apply text-neutral-600;
+    color: var(--muted);
   }
   .meta {
     @apply grid gap-1 text-sm;

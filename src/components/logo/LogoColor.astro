@@ -1,0 +1,49 @@
+---
+// A small round button, filled with the logo's colour, that moves the logo to the next colour.
+---
+
+<button type="button" class="logo-color" aria-label="Change the logo colour"></button>
+
+<style is:global>
+  .logo-color {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 2px solid var(--bg);
+    border-radius: 50%;
+    background: var(--logo-color);
+    box-shadow: 0 0 0 1px var(--border);
+    cursor: pointer;
+    transition:
+      background 0.3s,
+      transform 0.2s;
+  }
+  .logo-color:hover {
+    transform: scale(1.15);
+  }
+  .logo-color:active {
+    transform: scale(0.9);
+  }
+</style>
+
+<script>
+  import { LOGO_COLORS, LOGO_COLOR_KEY } from './colors';
+
+  const button = document.querySelector<HTMLButtonElement>('.logo-color');
+  const logo = document.querySelector<HTMLElement>('.logo');
+  const root = document.documentElement;
+
+  button?.addEventListener('click', () => {
+    const current = getComputedStyle(root).getPropertyValue('--logo-color').trim().toLowerCase();
+    const next = LOGO_COLORS[(LOGO_COLORS.indexOf(current) + 1) % LOGO_COLORS.length];
+    root.style.setProperty('--logo-color', next);
+    try {
+      localStorage.setItem(LOGO_COLOR_KEY, next);
+    } catch {}
+    // Restart the squish animation
+    logo?.classList.remove('squish');
+    void logo?.offsetWidth;
+    logo?.classList.add('squish');
+  });
+  logo?.addEventListener('animationend', () => logo.classList.remove('squish'));
+</script>

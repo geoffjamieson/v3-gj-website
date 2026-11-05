@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
 import photo from '../assets/geoff-about.jpg';
 ---
 
@@ -55,8 +56,9 @@ import photo from '../assets/geoff-about.jpg';
 
     <h2>Outside of work</h2>
     <p>
-      Some of the things I like doing are hiking, rock climbing, cooking, reading, and playing old
-      video games. I listen to a lot of music and collect CDs and vinyl. I also like working on fun
+      Some of the things I like doing are hiking, rock climbing, cooking,
+      <a href={site.storygraph}>reading</a>, and playing old video games. I listen to a lot of
+      <a href={site.bandcamp}>music</a> and collect CDs and vinyl. I also like working on fun
       coding side projects.
     </p>
     <p>

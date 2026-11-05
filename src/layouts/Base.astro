@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import Logo from '../components/logo/Logo.astro';
+import LogoColor from '../components/logo/LogoColor.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 interface Props {
   title?: string;
@@ -21,18 +24,33 @@ const pageTitle = title ? `${title} · ${site.name}` : site.name;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <!-- Apply the visitor's saved theme and logo colour before the page paints, so it doesn't flash -->
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+        const color = localStorage.getItem('logo-color');
+        if (color) document.documentElement.style.setProperty('--logo-color', color);
+      } catch {}
+    </script>
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
     <header class="site-header">
-      <a href="/" class="site-name">{site.name}</a>
-      <nav aria-label="Main">
-        <ul>
-          <li><a href="/#work">Work</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <div class="brand">
+        <a href="/" class="site-name" aria-label={`${site.name}, home`}><Logo /></a>
+        <LogoColor />
+      </div>
+      <div class="header-end">
+        <nav aria-label="Main">
+          <ul>
+            <li><a href="/#work">Work</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <ThemeToggle />
+      </div>
     </header>
 
     <main id="main">

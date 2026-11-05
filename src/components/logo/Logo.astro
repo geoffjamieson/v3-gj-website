@@ -1,0 +1,91 @@
+---
+// The gj mark: Kilo's g and j side by side, softly inflated. On hover it springs into the
+// stacked layout. Its colour comes from --logo-color, which visitors can change (LogoColor.astro).
+import { G_PATH, J_PATH, SIDE_BY_SIDE } from './marks';
+
+const VIEWBOX = '-1250 -650 2500 1300';
+const at = ([x, y]: readonly [number, number]) => `transform:translate(${x}px,${y}px)`;
+const glyphs = `<g class="logo-g" style="${at(SIDE_BY_SIDE.g)}"><path d="${G_PATH}"/></g><g class="logo-j" style="${at(SIDE_BY_SIDE.j)}"><path d="${J_PATH}"/></g>`;
+
+// Soft lighting: a blurred copy of the shape acts as a height map, lit from the top left.
+// The shading is mixed 75% with the flat colour and the shine kept dim, so the colour stays true.
+const filter = `<filter id="logo-inflate" x="-30%" y="-30%" width="160%" height="175%">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="40" result="b"/>
+  <feDiffuseLighting in="b" surfaceScale="9" diffuseConstant="1" lighting-color="#fff" result="df"><feDistantLight azimuth="235" elevation="55"/></feDiffuseLighting>
+  <feComposite in="df" in2="SourceAlpha" operator="in" result="dfi"/>
+  <feBlend in="SourceGraphic" in2="dfi" mode="multiply" result="shade0"/>
+  <feComposite in="shade0" in2="SourceGraphic" operator="arithmetic" k1="0" k2="0.75" k3="0.25" k4="0" result="shade"/>
+  <feSpecularLighting in="b" surfaceScale="9" specularConstant="0.55" specularExponent="30" lighting-color="#fff" result="sp"><fePointLight x="-600" y="-900" z="700"/></feSpecularLighting>
+  <feComposite in="sp" in2="SourceAlpha" operator="in" result="spi"/>
+  <feComposite in="shade" in2="spi" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+</filter>`;
+---
+
+<span class="logo" aria-hidden="true">
+  <svg viewBox={VIEWBOX} focusable="false">
+    <defs set:html={filter} />
+    <g class="logo-fill" filter="url(#logo-inflate)" set:html={glyphs} />
+  </svg>
+</span>
+
+<style is:global>
+  .logo {
+    display: block;
+    height: 64px;
+    aspect-ratio: 2500 / 1300;
+  }
+  .logo svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    display: block;
+  }
+  .logo-fill {
+    fill: var(--logo-color);
+    transition: fill 0.3s;
+  }
+  .logo-g,
+  .logo-j {
+    transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  .logo-j {
+    transition-delay: 0.08s;
+  }
+  /* A little squish when the colour changes */
+  .logo.squish svg {
+    animation: logo-squish 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
+  @keyframes logo-squish {
+    30% {
+      transform: scale(1.08, 0.9);
+    }
+    60% {
+      transform: scale(0.97, 1.04);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-g,
+    .logo-j {
+      transition: none;
+    }
+    .logo.squish svg {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { SIDE_BY_SIDE, STACKED } from './marks';
+
+  // Spring into the stacked layout while the logo is hovered (skipped for reduced motion)
+  const link = document.querySelector('.site-name');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  function setLayout(layout: typeof SIDE_BY_SIDE | typeof STACKED) {
+    const g = document.querySelector<SVGGElement>('.logo-g');
+    const j = document.querySelector<SVGGElement>('.logo-j');
+    if (g) g.style.transform = `translate(${layout.g[0]}px,${layout.g[1]}px)`;
+    if (j) j.style.transform = `translate(${layout.j[0]}px,${layout.j[1]}px)`;
+  }
+  link?.addEventListener('pointerenter', () => !reduce.matches && setLayout(STACKED));
+  link?.addEventListener('pointerleave', () => setLayout(SIDE_BY_SIDE));
+</script>
