@@ -8,6 +8,7 @@ stack: [Vue 3, TypeScript, Vite, Pinia, Tailwind, Web Components]
 homeStack: [Vue, TypeScript, Web Components]
 cover: ../../assets/case-studies/widget-library/wl-irae-search-typed.png
 heroVideo: /videos/widget-library/wl-playground-walkthrough.mp4
+heroLabel: A walkthrough of the widget playground
 ---
 
 A medical education company embeds small interactive widgets, like pre- and post-tests, search tools and a chatbot, across its websites and products. I turned them into a proper library of 14 widgets, running in production across about eight of the company's products, with a playground and documentation that let other developers build and ship widgets of their own.
@@ -36,11 +37,11 @@ The hardest part was the playground, and making sure every widget ran correctly 
 
 ![A search widget in the playground with its exported code](../../assets/case-studies/widget-library/wl-irae-search-code.png)
 
-![A pre-test widget asking for a confidence rating](../../assets/case-studies/widget-library/wl-pre-test-confidence.png)
+![A pre-test widget asking how confident you are in your answer to a diabetes question](../../assets/case-studies/widget-library/wl-pre-test-confidence.png)
 
-![A completion tracking widget](../../assets/case-studies/widget-library/wl-completionist.png)
+![A completion tracking widget showing progress through four case challenges](../../assets/case-studies/widget-library/wl-completionist.png)
 
-![A chatbot widget answering with references](../../assets/case-studies/widget-library/wl-universal-chatbot-references.png)
+![A chatbot widget answering a diabetes question, with its source listed below](../../assets/case-studies/widget-library/wl-universal-chatbot-references.png)
 
 </div>
 

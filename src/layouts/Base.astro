@@ -4,6 +4,7 @@ import { site } from '../data/site';
 import Logo from '../components/logo/Logo.astro';
 import LogoColor from '../components/logo/LogoColor.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import { LOGO_COLORS } from '../components/logo/colors';
 
 interface Props {
   title?: string;
@@ -21,16 +22,18 @@ const pageTitle = title ? `${title} · ${site.name}` : site.name;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={`/favicon/${LOGO_COLORS[0].slice(1)}.svg`} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-    {/* Apply the visitor's saved theme and logo colour before the page paints, so it doesn't flash */}
+    {/* Apply the visitor's saved theme and logo colour (logo and favicon) before the page paints, so it doesn't flash */}
     <script is:inline>
       try {
         const theme = localStorage.getItem('theme');
         if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
         const color = localStorage.getItem('logo-color');
-        if (color) document.documentElement.style.setProperty('--logo-color', color);
+        if (color) {
+          document.documentElement.style.setProperty('--logo-color', color);
+          document.querySelector('link[rel="icon"]').href = '/favicon/' + color.slice(1) + '.svg';
+        }
       } catch {}
     </script>
   </head>

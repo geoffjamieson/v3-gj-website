@@ -8,6 +8,7 @@ stack: [Next.js, TypeScript, Supabase, Claude API, Gemini API, Vercel]
 homeStack: [Next.js, Supabase, Claude, Gemini]
 cover: ../../assets/case-studies/menu-studio/ama-result.png
 heroVideo: /videos/menu-studio/ama-generate-walkthrough.mp4
+heroLabel: Generating a campaign in Menu Studio
 ---
 
 Menu Studio is for restaurants and food businesses without a marketing team. You upload a photo of a dish and get back four campaign images, plus a caption and hashtags. I took it from a prototype that didn't work end to end to a working app in production, built with AI coding tools, with me making the technical decisions, reviewing the code and testing it.

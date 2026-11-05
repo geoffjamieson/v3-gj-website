@@ -19,6 +19,8 @@ const caseStudies = defineCollection({
       links: z.array(z.object({ label: z.string(), url: z.url() })).default([]),
       // Path under public/, e.g. /videos/gtheme/gt-cli-demo.mp4
       heroVideo: z.string().optional(),
+      // What the hero video shows, read by screen readers and used as its caption in the gallery
+      heroLabel: z.string().optional(),
       // Screenshot shown with the project in the home page Work list
       cover: image(),
     }),

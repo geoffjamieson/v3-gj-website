@@ -13,6 +13,7 @@ links:
     url: https://github.com/geoffjamieson/gtheme
 cover: ../../assets/case-studies/gtheme/gt-marketplace-full.png
 heroVideo: /videos/gtheme/gt-cli-demo.mp4
+heroLabel: Using gTheme in the terminal
 ---
 
 gTheme is an open-source command-line tool for switching themes in the Ghostty terminal. It comes with a marketplace site for browsing themes and a pipeline that turns community theme submissions into pull requests automatically.
@@ -39,9 +40,9 @@ It's my own project, and I built all of it, using Claude Code throughout. I gave
 
 ![A pull request opened automatically from a theme submission](../../assets/case-studies/gtheme/gt-github-pr.png)
 
-![The gTheme marketplace site](../../assets/case-studies/gtheme/gt-marketplace-full.png)
+![The gTheme marketplace, with each community theme shown as a card of colour swatches](../../assets/case-studies/gtheme/gt-marketplace-full.png)
 
-![A theme previewed in the gTheme marketplace](../../assets/case-studies/gtheme/gt-marketplace-preview.png)
+![A live terminal preview of a theme, opened from the gTheme marketplace](../../assets/case-studies/gtheme/gt-marketplace-preview.png)
 
 </div>
 

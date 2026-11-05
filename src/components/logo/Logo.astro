@@ -1,27 +1,16 @@
 ---
 // The gj mark: Kilo's g and j side by side, softly inflated. On hover it springs into the
 // stacked layout. Its colour comes from --logo-color, which visitors can change (LogoColor.astro).
-import { G_PATH, J_PATH, SIDE_BY_SIDE } from './marks';
+import { G_PATH, J_PATH, SIDE_BY_SIDE, inflateFilter } from './marks';
 
 const VIEWBOX = '-1250 -650 2500 1300';
 const at = ([x, y]: readonly [number, number]) => `transform:translate(${x}px,${y}px)`;
 const glyphs = `<g class="logo-g" style="${at(SIDE_BY_SIDE.g)}"><path d="${G_PATH}"/></g><g class="logo-j" style="${at(SIDE_BY_SIDE.j)}"><path d="${J_PATH}"/></g>`;
 
-// Soft lighting: a blurred copy of the shape acts as a height map, lit from the top left.
-// The shading is mixed 75% with the flat colour and the shine kept dim, so the colour stays true.
 // The filter area is fixed in user units, big enough for both layouts and the spring's overshoot.
 // (Sized from the shape instead, browsers keep the stacked layout's narrow box after the morph back,
 // which clips the letters.)
-const filter = `<filter id="logo-inflate" filterUnits="userSpaceOnUse" x="-2000" y="-1700" width="4000" height="3400">
-  <feGaussianBlur in="SourceAlpha" stdDeviation="40" result="b"/>
-  <feDiffuseLighting in="b" surfaceScale="9" diffuseConstant="1" lighting-color="#fff" result="df"><feDistantLight azimuth="235" elevation="55"/></feDiffuseLighting>
-  <feComposite in="df" in2="SourceAlpha" operator="in" result="dfi"/>
-  <feBlend in="SourceGraphic" in2="dfi" mode="multiply" result="shade0"/>
-  <feComposite in="shade0" in2="SourceGraphic" operator="arithmetic" k1="0" k2="0.75" k3="0.25" k4="0" result="shade"/>
-  <feSpecularLighting in="b" surfaceScale="9" specularConstant="0.55" specularExponent="30" lighting-color="#fff" result="sp"><fePointLight x="-600" y="-900" z="700"/></feSpecularLighting>
-  <feComposite in="sp" in2="SourceAlpha" operator="in" result="spi"/>
-  <feComposite in="shade" in2="spi" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
-</filter>`;
+const filter = inflateFilter('logo-inflate', '-2000 -1700 4000 3400');
 ---
 
 <span class="logo" aria-hidden="true">

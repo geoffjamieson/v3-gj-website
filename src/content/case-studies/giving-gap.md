@@ -11,6 +11,7 @@ links:
     url: https://givinggap.org
 cover: ../../assets/case-studies/giving-gap/gg-events-highlight.png
 heroVideo: /videos/giving-gap/gg-homepage-scroll.mp4
+heroLabel: Scrolling through the Giving Gap homepage
 ---
 
 Giving Gap connects donors with more than 2,000 nonprofits. I was the main developer on its website for two years. When the site's frameworks fell past end of life, I rebuilt it from the ground up on Nuxt 4, and that version is now in production.
