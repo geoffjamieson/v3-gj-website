@@ -1,0 +1,249 @@
+---
+// Full-screen gallery for the media on a case study page. Every image and video inside an element
+// marked data-gallery becomes part of it, in page order. Images open on click (or Enter/Space);
+// videos keep their own click-to-play, so each gets a small "View larger" button instead.
+// Inside: arrow keys or the buttons move between items, Esc or a click outside closes.
+---
+
+<dialog class="lightbox" aria-label="Media viewer">
+  <button type="button" class="lb-button lb-close" aria-label="Close" autofocus>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+  </button>
+  <div class="lb-stage"></div>
+  <p class="lb-caption"></p>
+  <div class="lb-controls">
+    <button type="button" class="lb-button lb-prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+    </button>
+    <span class="lb-count" aria-live="polite"></span>
+    <button type="button" class="lb-button lb-next" aria-label="Next">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg>
+    </button>
+  </div>
+</dialog>
+
+<style is:global>
+  [data-gallery] img {
+    cursor: zoom-in;
+  }
+  [data-gallery] img:focus-visible {
+    outline: 2px solid var(--logo-color);
+    outline-offset: 3px;
+  }
+  /* Videos are wrapped in .vwrap so the "View larger" button can sit on top-left of each */
+  .vwrap {
+    position: relative;
+  }
+  .vwrap video {
+    display: block;
+  }
+  .lb-open {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px 4px 8px;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(0 0 0 / 0.65);
+    color: #fff;
+    font: 12px/1.4 ui-sans-serif, system-ui, sans-serif;
+    cursor: pointer;
+  }
+  .lb-open:hover,
+  .lb-open:focus-visible {
+    background: rgb(0 0 0 / 0.85);
+    outline: 2px solid var(--logo-color);
+    outline-offset: 1px;
+  }
+  .lb-open svg,
+  .lb-button svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* The viewer fills the screen; the page behind doesn't scroll while it's open */
+  html:has(.lightbox[open]) {
+    overflow: hidden;
+  }
+  .lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 56px 16px 20px;
+    border: 0;
+    background: rgb(10 10 11 / 0.98);
+    color: #f2f2ef;
+  }
+  .lightbox[open] {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto auto;
+  }
+  .lightbox::backdrop {
+    background: transparent;
+  }
+  .lb-stage {
+    display: grid;
+    place-items: center;
+    min-height: 0;
+    touch-action: pan-y;
+  }
+  .lb-stage img,
+  .lb-stage video {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 170px);
+    margin: 0;
+    border: 0;
+    border-radius: 6px;
+    cursor: default;
+  }
+  .lb-caption {
+    max-width: 60ch;
+    margin: 14px auto 8px;
+    text-align: center;
+    color: #c8c8c4;
+    font-size: 14px;
+  }
+  .lb-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    font-size: 14px;
+  }
+  .lb-count {
+    min-width: 4.5em;
+    text-align: center;
+    color: #c8c8c4;
+  }
+  .lb-button {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgb(255 255 255 / 0.3);
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .lb-button:hover,
+  .lb-button:focus-visible {
+    border-color: var(--logo-color);
+    outline: none;
+  }
+  .lb-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+  const gallery = document.querySelector<HTMLElement>('[data-gallery]');
+
+  if (dialog && gallery) {
+    const stage = dialog.querySelector<HTMLElement>('.lb-stage')!;
+    const caption = dialog.querySelector<HTMLElement>('.lb-caption')!;
+    const count = dialog.querySelector<HTMLElement>('.lb-count')!;
+    const items = [...gallery.querySelectorAll<HTMLImageElement | HTMLVideoElement>('img, video')];
+    let index = 0;
+
+    const label = (el: HTMLImageElement | HTMLVideoElement) =>
+      el instanceof HTMLImageElement ? el.alt : el.getAttribute('aria-label') || '';
+
+    function show(i: number) {
+      index = (i + items.length) % items.length;
+      const item = items[index];
+      let view: HTMLImageElement | HTMLVideoElement;
+      if (item instanceof HTMLImageElement) {
+        view = new Image();
+        view.src = item.currentSrc || item.src;
+        view.alt = item.alt;
+      } else {
+        item.pause();
+        view = document.createElement('video');
+        view.src = item.currentSrc || item.src;
+        view.controls = true;
+        view.muted = true;
+        view.playsInline = true;
+        view.autoplay = true;
+        view.setAttribute('aria-label', label(item));
+      }
+      stage.replaceChildren(view);
+      caption.textContent = label(item);
+      count.textContent = `${index + 1} of ${items.length}`;
+    }
+
+    function open(i: number) {
+      show(i);
+      if (!dialog!.open) dialog!.showModal();
+    }
+
+    items.forEach((item, i) => {
+      if (item instanceof HTMLImageElement) {
+        item.tabIndex = 0;
+        item.setAttribute('role', 'button');
+        item.setAttribute('aria-label', `View larger: ${item.alt}`);
+        item.addEventListener('click', () => open(i));
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open(i);
+          }
+        });
+      } else {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'lb-open';
+        button.innerHTML =
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"></path></svg>View larger';
+        button.setAttribute('aria-label', `View larger: ${label(item)}`);
+        button.addEventListener('click', () => open(i));
+        item.closest('.vwrap')?.append(button);
+      }
+    });
+
+    dialog.querySelector('.lb-prev')!.addEventListener('click', () => show(index - 1));
+    dialog.querySelector('.lb-next')!.addEventListener('click', () => show(index + 1));
+    dialog.querySelector('.lb-close')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('keydown', (e) => {
+      // Leave the arrow keys to a video's own controls while one of them has focus
+      if ((e.target as HTMLElement).tagName === 'VIDEO') return;
+      if (e.key === 'ArrowLeft') show(index - 1);
+      if (e.key === 'ArrowRight') show(index + 1);
+    });
+    // Swipe left or right on touch screens
+    let startX: number | null = null;
+    let swiped = false;
+    stage.addEventListener('pointerdown', (e) => (startX = e.clientX));
+    stage.addEventListener('pointerup', (e) => {
+      if (startX === null) return;
+      const dx = e.clientX - startX;
+      startX = null;
+      swiped = Math.abs(dx) > 50;
+      if (swiped) show(index + (dx < 0 ? 1 : -1));
+    });
+    // A click on the dark area around the media closes the viewer (but not the end of a swipe)
+    dialog.addEventListener('click', (e) => {
+      if (swiped) return void (swiped = false);
+      if (e.target === dialog || e.target === stage) dialog.close();
+    });
+    // Emptying the stage stops any video that was playing
+    dialog.addEventListener('close', () => stage.replaceChildren());
+  }
+</script>

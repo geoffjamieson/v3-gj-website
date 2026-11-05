@@ -30,15 +30,31 @@ Generating a campaign takes several AI calls and can fail partway through, so mo
 - **Direct photo uploads.** Photos go straight from the browser to storage, which gets around the 1 MB limit on requests to the server.
 - **Accounts and data.** Supabase handles sign-up, email confirmation and password reset, the Postgres database (with row-level security so each user only sees their own data) and file storage.
 
+<div class="shots">
+
+<div class="tall">
+
 ![Editing brand details in Menu Studio](../../assets/case-studies/menu-studio/ama-brand-edit.png)
 
+</div>
+
+<div class="tall">
+
 ![A dish photo uploaded and ready to generate in Menu Studio](../../assets/case-studies/menu-studio/ama-generate-ready.png)
+
+</div>
 
 ![A Menu Studio campaign in progress, at the writing stage](../../assets/case-studies/menu-studio/ama-progress-writing.png)
 
 ![A finished Menu Studio campaign with four images, a caption and hashtags](../../assets/case-studies/menu-studio/ama-result.png)
 
+<div class="tall">
+
 ![A finished Menu Studio campaign on a phone](../../assets/case-studies/menu-studio/ama-mobile-result.png)
+
+</div>
+
+</div>
 
 ## Outcome
 

@@ -35,21 +35,37 @@ Most of the difficulty was scale. The old code was hard to read, so much of the 
 - **Content and SEO.** I rebuilt how CMS content renders, with a Portable Text renderer and a server-side Sanity client, and generated the sitemap and robots.txt from the CMS.
 - **Documentation.** I commented the code thoroughly and documented the new codebase, so the next developer could find their way around it.
 
+<div class="shots">
+
 ![An organization detail modal on the Giving Gap website](../../assets/case-studies/giving-gap/gg-org-modal.png)
+
+<div class="tall">
 
 ![The Giving Gap homepage on a phone](../../assets/case-studies/giving-gap/gg-mobile-home.png)
 
-<video src="/videos/giving-gap/gg-submit-form.mp4" aria-label="Filling out the Giving Gap organization submission form" controls muted playsinline preload="metadata"></video>
+</div>
+
+<div class="vwrap"><video src="/videos/giving-gap/gg-submit-form.mp4" aria-label="Filling out the Giving Gap organization submission form" controls muted playsinline preload="metadata"></video></div>
+
+</div>
 
 ## Also on Giving Gap
 
 **Org dashboard.** The Giving Gap team tracked nonprofit applications in a Google Sheet, so I proposed a dashboard to replace it. It started as an admin table for reviewing submissions and setting their status, then grew into a card-based design with a detail page per organization, filters, and user reports with CSV export. Adding Auth0 let nonprofits log in to see their own status alongside the team's admin view.
 
-<video src="/videos/giving-gap/gg-dashboard-record-walkthrough.mp4" aria-label="A walkthrough of an organization record in the Giving Gap dashboard, with details blurred" controls muted playsinline preload="metadata"></video>
+<div class="shots">
+
+<div class="vwrap"><video src="/videos/giving-gap/gg-dashboard-record-walkthrough.mp4" aria-label="A walkthrough of an organization record in the Giving Gap dashboard, with details blurred" controls muted playsinline preload="metadata"></video></div>
+
+</div>
 
 **Imani chat assistant.** Given an existing AI backend, I built the whole front end from our designer's rough designs, including the chat interface, the animations for messages coming in and going out, and its mobile layout. I packaged it as a standalone web component, so it can be embedded in the website or the dashboard, or run on its own.
 
-<video src="/videos/giving-gap/gg-imani-chat-mobile.mp4" aria-label="Chatting with the Imani assistant on a phone" controls muted playsinline preload="metadata"></video>
+<div class="shots">
+
+<div class="vwrap tall"><video src="/videos/giving-gap/gg-imani-chat-mobile.mp4" aria-label="Chatting with the Imani assistant on a phone" controls muted playsinline preload="metadata"></video></div>
+
+</div>
 
 ## Outcome
 

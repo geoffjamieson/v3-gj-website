@@ -171,4 +171,42 @@
   .prose li {
     @apply mb-2;
   }
+  /* Section headings on case study and About pages, the same size as the home page sections */
+  .prose h2 {
+    @apply text-2xl mb-4;
+    margin-top: 3.5rem;
+  }
+
+  /* A run of screenshots and videos in a case study (wrapped in <div class="shots"> in the
+     markdown). Wide ones take the full row; tall ones (phone screens, marked with class="tall")
+     are capped in height and sit side by side when two come in a row. */
+  .shots {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 16px;
+    margin: 1.75rem 0;
+  }
+  .shots p,
+  .shots img,
+  .shots video {
+    margin: 0;
+  }
+  .shots > p,
+  .shots > .vwrap:not(.tall) {
+    flex: 1 1 100%;
+  }
+  .shots > .tall {
+    flex: 0 0 calc(50% - 8px);
+  }
+  .shots .tall img,
+  .shots .tall video {
+    width: auto;
+    max-width: 100%;
+    max-height: 520px;
+  }
+  /* The other projects at the bottom of a case study */
+  .more-work {
+    margin-top: 4.5rem;
+  }
 }

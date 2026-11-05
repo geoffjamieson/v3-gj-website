@@ -1,0 +1,28 @@
+---
+// The list of projects, each with a small screenshot beside its title, tagline and stack.
+// Used for Work on the home page and More work at the bottom of each case study.
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+
+interface Props {
+  studies: CollectionEntry<'case-studies'>[];
+}
+const { studies } = Astro.props;
+---
+
+<ul class="work-list">
+  {
+    studies.map((study) => (
+      <li>
+        <a href={`/work/${study.id}`}>
+          <Image src={study.data.cover} alt="" widths={[220, 440, 720, 1080]} sizes="(min-width: 561px) 220px, 100vw" />
+          <div>
+            <h3>{study.data.title}</h3>
+            <p>{study.data.tagline}</p>
+            <p class="stack">{study.data.homeStack.join(' · ')}</p>
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -31,6 +31,8 @@ It's my own project, and I built all of it, using Claude Code throughout. I gave
 - **A community submission pipeline.** A GitHub issue form collects a theme's config and six preview colors. A GitHub Actions workflow then validates the submission (name format, duplicates, hex colors), adds the theme to the registry and opens a pull request. When validation fails, it comments on the issue with the reason.
 - **A marketplace site.** A single static page in vanilla HTML, CSS and JavaScript, with search, tag filters, a live terminal preview, color swatches and a copy-to-install button. Each of the four bundled themes has its own designed look.
 
+<div class="shots">
+
 ![Installing gTheme from the terminal](../../assets/case-studies/gtheme/gt-cli-install.png)
 
 ![The GitHub issue form for submitting a theme](../../assets/case-studies/gtheme/gt-github-issue-form.png)
@@ -40,6 +42,8 @@ It's my own project, and I built all of it, using Claude Code throughout. I gave
 ![The gTheme marketplace site](../../assets/case-studies/gtheme/gt-marketplace-full.png)
 
 ![A theme previewed in the gTheme marketplace](../../assets/case-studies/gtheme/gt-marketplace-preview.png)
+
+</div>
 
 ## Outcome
 

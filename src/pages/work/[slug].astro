@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import WorkList from '../../components/WorkList.astro';
 
 export async function getStaticPaths() {
   const caseStudies = await getCollection('case-studies');
@@ -10,10 +12,15 @@ export async function getStaticPaths() {
 const { study } = Astro.props;
 const { title, tagline, role, dates, stack, links, heroVideo } = study.data;
 const { Content } = await render(study);
+
+// The other projects, in the same order as the home page Work list
+const otherStudies = (await getCollection('case-studies'))
+  .filter((other) => other.id !== study.id)
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base title={title} description={tagline}>
-  <article class="prose">
+  <article class="prose" data-gallery>
     <header class="case-header">
       <h1>{title}</h1>
       <p class="tagline">{tagline}</p>
@@ -41,10 +48,19 @@ const { Content } = await render(study);
 
     {
       heroVideo && (
-        <video src={heroVideo} controls muted playsinline preload="metadata" aria-label={`${title} walkthrough`} />
+        <div class="vwrap">
+          <video src={heroVideo} controls muted playsinline preload="metadata" aria-label={`${title} walkthrough`} />
+        </div>
       )
     }
 
     <Content />
   </article>
+
+  <section class="more-work" aria-labelledby="more-work-heading">
+    <h2 id="more-work-heading">More work</h2>
+    <WorkList studies={otherStudies} />
+  </section>
+
+  <Lightbox />
 </Base>

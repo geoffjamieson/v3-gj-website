@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Button from '../components/Button.astro';
+import WorkList from '../components/WorkList.astro';
 import { site } from '../data/site';
 
 const caseStudies = (await getCollection('case-studies')).sort(
@@ -13,7 +13,7 @@ const caseStudies = (await getCollection('case-studies')).sort(
 <Base>
   <section class="intro">
     <h1>Hey, I'm Geoff.</h1>
-    <!-- Placeholder copy, to revisit once the design is in place -->
+    {/* Placeholder copy, to revisit once the design is in place */}
     <p class="subheader">Front-end developer.</p>
     <p>
       I like making things. Lately I've been picking up more of the back end, because the more of
@@ -28,27 +28,7 @@ const caseStudies = (await getCollection('case-studies')).sort(
 
   <section id="work" aria-labelledby="work-heading">
     <h2 id="work-heading">Work</h2>
-    <ul class="work-list">
-      {
-        caseStudies.map((study) => (
-          <li>
-            <a href={`/work/${study.id}`}>
-              <Image
-                src={study.data.cover}
-                alt=""
-                widths={[360, 720, 1080]}
-                sizes="(min-width: 640px) 330px, 100vw"
-              />
-              <div>
-                <h3>{study.data.title}</h3>
-                <p>{study.data.tagline}</p>
-                <p class="stack">{study.data.homeStack.join(' · ')}</p>
-              </div>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <WorkList studies={caseStudies} />
   </section>
 
   <section aria-labelledby="about-heading">

@@ -24,7 +24,7 @@ const pageTitle = title ? `${title} · ${site.name}` : site.name;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-    <!-- Apply the visitor's saved theme and logo colour before the page paints, so it doesn't flash -->
+    {/* Apply the visitor's saved theme and logo colour before the page paints, so it doesn't flash */}
     <script is:inline>
       try {
         const theme = localStorage.getItem('theme');
@@ -57,7 +57,7 @@ const pageTitle = title ? `${title} · ${site.name}` : site.name;
       <slot />
     </main>
 
-    <!-- The contact section doubles as the footer on every page -->
+    {/* The contact section doubles as the footer on every page */}
     <footer id="contact" class="site-footer" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Let's talk</h2>
       <p>I'm open to full-time roles, and happy to chat about anything here.</p>

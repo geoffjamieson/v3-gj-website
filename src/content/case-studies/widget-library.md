@@ -32,6 +32,8 @@ The hardest part was the playground, and making sure every widget ran correctly 
 - **Built for distribution.** The library builds as ES modules hosted on Netlify with the right cross-origin settings, so any of the client's sites can load a widget, with environment-based configuration.
 - **Documentation.** I wrote general docs on how to build and use a widget, plus a page for every widget, so other developers could work without me.
 
+<div class="shots">
+
 ![A search widget in the playground with its exported code](../../assets/case-studies/widget-library/wl-irae-search-code.png)
 
 ![A pre-test widget asking for a confidence rating](../../assets/case-studies/widget-library/wl-pre-test-confidence.png)
@@ -39,6 +41,8 @@ The hardest part was the playground, and making sure every widget ran correctly 
 ![A completion tracking widget](../../assets/case-studies/widget-library/wl-completionist.png)
 
 ![A chatbot widget answering with references](../../assets/case-studies/widget-library/wl-universal-chatbot-references.png)
+
+</div>
 
 ## Outcome
 
