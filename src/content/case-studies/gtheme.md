@@ -11,6 +11,7 @@ links:
     url: https://geoffjamieson.github.io/gtheme/
   - label: GitHub
     url: https://github.com/geoffjamieson/gtheme
+cover: ../../assets/case-studies/gtheme/gt-marketplace-full.png
 heroVideo: /videos/gtheme/gt-cli-demo.mp4
 ---
 

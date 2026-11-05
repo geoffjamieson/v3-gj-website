@@ -6,6 +6,7 @@ role: Frontend Developer, LCube Studios
 dates: Aug – Sep 2026
 stack: [Next.js, TypeScript, Supabase, Claude API, Gemini API, Vercel]
 homeStack: [Next.js, Supabase, Claude, Gemini]
+cover: ../../assets/case-studies/menu-studio/ama-result.png
 heroVideo: /videos/menu-studio/ama-generate-walkthrough.mp4
 ---
 

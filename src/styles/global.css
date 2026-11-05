@@ -70,6 +70,15 @@
   h2 {
     @apply text-xl mt-10 mb-3;
   }
+  /* Home page section headings (Work, About) and the footer's Let's talk: bigger, with more room
+     above so each section reads as its own block */
+  main > section + section {
+    margin-top: 4.5rem;
+  }
+  main > section > h2,
+  .site-footer > h2 {
+    @apply text-2xl mt-0 mb-5;
+  }
   p,
   ul {
     @apply mb-4;
@@ -89,7 +98,8 @@
     @apply flex flex-wrap items-center justify-between gap-4 mb-12;
   }
   .site-footer {
-    @apply mt-16 pt-2 border-t;
+    @apply pt-8 border-t;
+    margin-top: 4.5rem;
     border-color: var(--border);
   }
   .subheader {
@@ -111,10 +121,36 @@
     @apply flex flex-wrap items-center gap-4;
   }
   .work-list {
-    @apply grid gap-6;
+    @apply grid gap-8;
   }
+  /* Each project: a small screenshot beside its title, tagline and stack */
   .work-list a {
-    @apply block no-underline;
+    @apply no-underline;
+    display: grid;
+    grid-template-columns: minmax(0, 220px) 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+  .work-list a > div {
+    display: grid;
+    gap: 0.15rem;
+  }
+  /* On narrow screens the screenshot sits above the text */
+  @media (max-width: 560px) {
+    .work-list a {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+  .work-list img {
+    margin: 0;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top left;
+    border-radius: 8px;
+  }
+  .work-list p {
+    @apply mb-0;
   }
   .stack,
   .tagline {

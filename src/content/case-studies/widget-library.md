@@ -6,6 +6,7 @@ role: Frontend Developer, LCube Studios
 dates: Feb – Jun 2026
 stack: [Vue 3, TypeScript, Vite, Pinia, Tailwind, Web Components]
 homeStack: [Vue, TypeScript, Web Components]
+cover: ../../assets/case-studies/widget-library/wl-irae-search-typed.png
 heroVideo: /videos/widget-library/wl-playground-walkthrough.mp4
 ---
 

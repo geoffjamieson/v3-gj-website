@@ -9,6 +9,7 @@ homeStack: [Nuxt, TypeScript, Sanity, Auth0]
 links:
   - label: givinggap.org
     url: https://givinggap.org
+cover: ../../assets/case-studies/giving-gap/gg-events-highlight.png
 heroVideo: /videos/giving-gap/gg-homepage-scroll.mp4
 ---
 
