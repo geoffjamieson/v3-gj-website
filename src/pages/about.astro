@@ -10,7 +10,7 @@ import photo from '../assets/geoff-about.jpg';
     <h1>Hey, I'm Geoff</h1>
     <p>I'm a front-end developer in Hamilton, Ontario.</p>
 
-    <Image src={photo} alt="Geoff Jamieson" widths={[480, 960]} sizes="(min-width: 720px) 480px, 100vw" />
+    <Image src={photo} alt="Geoff Jamieson" class="about-photo" widths={[280, 560, 840]} sizes="280px" />
 
     <h2>Koji Street</h2>
     <p>
@@ -69,3 +69,12 @@ import photo from '../assets/geoff-about.jpg';
     </p>
   </article>
 </Base>
+
+<style>
+  /* Kept small, in scale with the screenshots in the home page Work list */
+  .about-photo {
+    width: 280px;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+</style>
