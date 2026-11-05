@@ -1,0 +1,60 @@
+---
+// A link styled as a button: slightly rounded, with a grey 2px border. On hover or keyboard focus
+// the logo colour runs around the border from the top-left corner like water filling a tube, and
+// drains back out afterwards. (An SVG rect's outline starts at its top-left and goes clockwise.)
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+}
+const { href, variant = 'primary' } = Astro.props;
+---
+
+<a href={href} class:list={['btn', `btn-${variant}`]}>
+  <slot />
+  <svg class="btn-trace" aria-hidden="true" focusable="false">
+    <rect x="0" y="0" width="100%" height="100%" rx="8" pathLength="1"></rect>
+  </svg>
+</a>
+
+<style>
+  .btn {
+    position: relative;
+    display: inline-block;
+    padding: 0.35em 0.9em;
+    border: 2px solid color-mix(in srgb, var(--text) 22%, transparent);
+    border-radius: 8px;
+    color: inherit;
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  .btn:focus-visible {
+    outline: none;
+  }
+  /* The SVG sits exactly over the border. Its outline is drawn twice as thick and clipped by the
+     SVG's edges, so the visible half lines up with the 2px border and its rounded corners. */
+  .btn-trace {
+    position: absolute;
+    inset: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    overflow: hidden;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+  .btn-trace rect {
+    fill: none;
+    stroke: var(--logo-color);
+    stroke-width: 4;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .btn:is(:hover, :focus-visible) .btn-trace rect {
+    stroke-dashoffset: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-trace rect {
+      transition: none;
+    }
+  }
+</style>

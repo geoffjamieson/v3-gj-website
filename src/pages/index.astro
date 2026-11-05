@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
 import { site } from '../data/site';
 
 const caseStudies = (await getCollection('case-studies')).sort(
@@ -19,8 +20,8 @@ const caseStudies = (await getCollection('case-studies')).sort(
       the product as much as the code.
     </p>
     <p class="actions">
-      <a href="#work">See my work</a>
-      <a href="#contact">Get in touch</a>
+      <Button href="#work">See my work</Button>
+      <Button href="#contact" variant="secondary">Get in touch</Button>
     </p>
   </section>
 

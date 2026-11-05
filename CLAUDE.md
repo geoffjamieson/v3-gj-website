@@ -12,7 +12,7 @@ Geoff Jamieson's portfolio, built with Astro and Tailwind. It replaces v2 (`~/Co
 - `src/content/case-studies/*.md`: the four case studies (frontmatter holds the header; `order` sets the Work list order). They follow `docs/case-study-outline.md`.
 - `src/pages/index.astro` and `src/pages/about.astro`: home and About copy, written directly in the page.
 - `src/data/site.ts`: email and profile links.
-- Fonts: Baskervville (body, 17px) and Cabinet Grotesk Bold (headings), self-hosted in `public/fonts/` with `@font-face` rules at the top of `src/styles/global.css`. Cabinet Grotesk's Fontshare licence allows self-hosting but forbids redistributing or modifying the files, so the GitHub repo must stay private and the files must stay as downloaded.
+- Fonts: Lucida Grande throughout (body 15px, headings bold), a system font on Mac (Lucida Sans Unicode on Windows), so nothing is self-hosted. Phones don't have it and show their own system font. Set by `--font-body` and `--font-head` in `src/styles/global.css`.
 - `src/components/logo/`: the gj logo (Kilo's g and j, softly inflated, springs into a stacked layout on hover) and the button that lets visitors change its colour. `src/components/ThemeToggle.astro` is the light/dark toggle; colours are tokens at the top of `src/styles/global.css`. Both choices are saved in localStorage and applied before paint by the inline script in `Base.astro`.
 - `src/assets/`: images (optimised by Astro). `public/videos/<slug>/`: videos, served as is.
 - No resume on the site (Geoff's call, 2026-11-05). The case studies and About cover it, and LinkedIn has the timeline.
