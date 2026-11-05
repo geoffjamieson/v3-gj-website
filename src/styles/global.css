@@ -5,8 +5,40 @@
   Everything visual here is expected to be replaced.
 */
 
-/* Colour tokens. Dark follows the system setting unless the visitor picks one with the toggle. */
+/*
+  Fonts, self-hosted in public/fonts.
+  Baskervville (body): SIL Open Font License, see public/fonts/Baskervville-OFL.txt.
+  Cabinet Grotesk (headings): ITF Free Font License from Fontshare, which allows self-hosting on our
+  own site but not redistributing the files (so keep this repo private) or modifying them.
+*/
+@font-face {
+  font-family: 'Baskervville';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/baskervville-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Baskervville';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/baskervville-italic-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/CabinetGrotesk-Bold.woff2') format('woff2');
+}
+
+/* Colour and type tokens. Dark follows the system setting unless the visitor picks one with the toggle. */
 :root {
+  --font-body: 'Baskervville', Georgia, serif;
+  --font-head: 'Cabinet Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --body-size: 17px;
+  --head-weight: 700;
   --bg: #ffffff;
   --text: #171717;
   --muted: #525252;
@@ -33,21 +65,28 @@
 
 @layer base {
   body {
-    @apply mx-auto max-w-2xl px-4 py-8 font-sans leading-relaxed;
+    @apply mx-auto max-w-2xl px-4 py-8 leading-relaxed;
     background: var(--bg);
     color: var(--text);
+    font-family: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+    font-size: var(--body-size, 1rem);
+    /* Baskervville defaults to old-style numbers, where 0 looks like o ("Auth0" reads "Autho") */
+    font-variant-numeric: lining-nums;
   }
   a {
     @apply underline underline-offset-2;
   }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-head, inherit);
+    font-weight: var(--head-weight, 700);
+  }
   h1 {
-    @apply text-3xl font-bold mb-4;
+    @apply text-3xl mb-4;
   }
   h2 {
-    @apply text-xl font-semibold mt-10 mb-3;
-  }
-  h3 {
-    @apply font-semibold;
+    @apply text-xl mt-10 mb-3;
   }
   p,
   ul {

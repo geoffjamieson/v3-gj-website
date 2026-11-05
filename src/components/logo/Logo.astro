@@ -9,7 +9,10 @@ const glyphs = `<g class="logo-g" style="${at(SIDE_BY_SIDE.g)}"><path d="${G_PAT
 
 // Soft lighting: a blurred copy of the shape acts as a height map, lit from the top left.
 // The shading is mixed 75% with the flat colour and the shine kept dim, so the colour stays true.
-const filter = `<filter id="logo-inflate" x="-30%" y="-30%" width="160%" height="175%">
+// The filter area is fixed in user units, big enough for both layouts and the spring's overshoot.
+// (Sized from the shape instead, browsers keep the stacked layout's narrow box after the morph back,
+// which clips the letters.)
+const filter = `<filter id="logo-inflate" filterUnits="userSpaceOnUse" x="-2000" y="-1700" width="4000" height="3400">
   <feGaussianBlur in="SourceAlpha" stdDeviation="40" result="b"/>
   <feDiffuseLighting in="b" surfaceScale="9" diffuseConstant="1" lighting-color="#fff" result="df"><feDistantLight azimuth="235" elevation="55"/></feDiffuseLighting>
   <feComposite in="df" in2="SourceAlpha" operator="in" result="dfi"/>
@@ -31,7 +34,7 @@ const filter = `<filter id="logo-inflate" x="-30%" y="-30%" width="160%" height=
 <style is:global>
   .logo {
     display: block;
-    height: 64px;
+    height: 80px;
     aspect-ratio: 2500 / 1300;
   }
   .logo svg {
