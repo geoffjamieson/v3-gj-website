@@ -44,6 +44,12 @@ const ogImage = new URL('/og.png', Astro.site);
     <meta property="og:image:alt" content={`${site.name}, front-end developer in Hamilton, Ontario`} />
     <meta name="twitter:card" content="summary_large_image" />
 
+    {/* Vercel Web Analytics: cookieless page views. Same as their Astro component, without the package */}
+    <script is:inline>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
+
     {/* Apply the visitor's saved theme and logo colour (logo and favicon) before the page paints, so it doesn't flash */}
     <script is:inline>
       try {
