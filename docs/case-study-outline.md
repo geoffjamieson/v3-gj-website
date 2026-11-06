@@ -1,6 +1,6 @@
 # Case study outline
 
-The shared structure for every case study on the portfolio site, so all four read the same way. Content comes from `master_context.md` only (see the drafting guardrail in `rules.md`). Assets live in `case-study-assets/<project>/`; each section lists the ones that belong to it.
+The shared structure for every case study on the portfolio site, so all four read the same way. Content comes from `master_context.md` only (see the drafting guardrail in `rules.md`). Images live in `src/assets/case-studies/<project>/` and videos in `public/videos/<project>/`.
 
 1. **Header:** project name, a one-line description, role and dates, a short stack line, and a live link if there is one.
 2. **Summary:** two or three sentences covering what the product is, what I did, and where it ended up. Someone who reads only this should get the point.
