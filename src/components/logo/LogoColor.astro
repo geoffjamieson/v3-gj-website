@@ -38,7 +38,7 @@
     const next = LOGO_COLORS[(LOGO_COLORS.indexOf(current) + 1) % LOGO_COLORS.length];
     root.style.setProperty('--logo-color', next);
     // The browser tab's icon follows the colour too
-    const icon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    const icon = document.querySelector<HTMLLinkElement>('link[rel="icon"][type="image/svg+xml"]');
     if (icon) icon.href = `/favicon/${next.slice(1)}.svg`;
     try {
       localStorage.setItem(LOGO_COLOR_KEY, next);

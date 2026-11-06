@@ -29,8 +29,8 @@ It's my own project, and I built all of it, using Claude Code throughout. I gave
 ## How I built it
 
 - **A CLI in plain Bash.** Commands cover listing themes in an interactive picker, switching, searching, adding, removing, updating and submitting. Themes are plain Ghostty config files, and the active theme is a symlink, so switching is instant with no config editing. A one-line installer sets up the PATH, the tool updates itself, and it warns you when a theme's font isn't installed. There's no server or package manager, since `gtheme add` pulls theme files straight from GitHub.
-- **A community submission pipeline.** A GitHub issue form collects a theme's config and six preview colors. A GitHub Actions workflow then validates the submission (name format, duplicates, hex colors), adds the theme to the registry and opens a pull request. When validation fails, it comments on the issue with the reason.
-- **A marketplace site.** A single static page in vanilla HTML, CSS and JavaScript, with search, tag filters, a live terminal preview, color swatches and a copy-to-install button. Each of the four bundled themes has its own designed look.
+- **A community submission pipeline.** A GitHub issue form collects a theme's config and six preview colours. A GitHub Actions workflow then validates the submission (name format, duplicates, hex colours), adds the theme to the registry and opens a pull request. When validation fails, it comments on the issue with the reason.
+- **A marketplace site.** A single static page in vanilla HTML, CSS and JavaScript, with search, tag filters, a live terminal preview, colour swatches and a copy-to-install button. Each of the four bundled themes has its own designed look.
 
 <div class="shots">
 

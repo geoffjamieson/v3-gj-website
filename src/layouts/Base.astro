@@ -13,6 +13,10 @@ interface Props {
 
 const { title, description = site.description } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : site.name;
+// Without the trailing slash the build adds (/about/), so it matches the site's links (/about)
+const canonical = new URL(Astro.url.pathname.replace(/(.)\/$/, '$1'), Astro.site);
+// The link preview image, made from the dark name card option (1200 by 630)
+const ogImage = new URL('/og.png', Astro.site);
 ---
 
 <!doctype html>
@@ -22,8 +26,24 @@ const pageTitle = title ? `${title} · ${site.name}` : site.name;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {/* The SVG favicon follows the logo colour. The pink PNG is for browsers without SVG favicons, like older Safari */}
     <link rel="icon" type="image/svg+xml" href={`/favicon/${LOGO_COLORS[0].slice(1)}.svg`} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonical} />
+
+    {/* Link previews in LinkedIn, Slack, iMessage, email and so on */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.name}, front-end developer in Hamilton, Ontario`} />
+    <meta name="twitter:card" content="summary_large_image" />
+
     {/* Apply the visitor's saved theme and logo colour (logo and favicon) before the page paints, so it doesn't flash */}
     <script is:inline>
       try {
@@ -32,7 +52,7 @@ const pageTitle = title ? `${title} · ${site.name}` : site.name;
         const color = localStorage.getItem('logo-color');
         if (color) {
           document.documentElement.style.setProperty('--logo-color', color);
-          document.querySelector('link[rel="icon"]').href = '/favicon/' + color.slice(1) + '.svg';
+          document.querySelector('link[rel="icon"][type="image/svg+xml"]').href = '/favicon/' + color.slice(1) + '.svg';
         }
       } catch {}
     </script>
@@ -63,7 +83,10 @@ const pageTitle = title ? `${title} · ${site.name}` : site.name;
     {/* The contact section doubles as the footer on every page */}
     <footer id="contact" class="site-footer" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Let's talk</h2>
-      <p>I'm open to full-time roles, and happy to chat about anything here.</p>
+      <p>
+        I'm open to full-time roles, and happy to chat about work or anything else. Feel free to
+        reach out 🤠
+      </p>
       <ul class="contact-links">
         <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
         <li><a href={site.linkedin}>LinkedIn</a></li>

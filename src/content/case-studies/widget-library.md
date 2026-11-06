@@ -15,7 +15,7 @@ A medical education company embeds small interactive widgets, like pre- and post
 
 ## The problem
 
-The widgets lived in a legacy project nobody was maintaining, with their logic spread across several codebases. The client is a large company with many separate teams, and most of their developers couldn't access our repos or didn't know them. So whenever a team needed one of our widgets in their product, or even just a different color on one, they had to ask us to change it and send it back. Small requests kept landing on my team, and the other developers had to wait on us for every one.
+The widgets lived in a legacy project nobody was maintaining, with their logic spread across several codebases. The client is a large company with many separate teams, and most of their developers couldn't access our repos or didn't know them. So whenever a team needed one of our widgets in their product, or even just a different colour on one, they had to ask us to change it and send it back. Small requests kept landing on my team, and the other developers had to wait on us for every one.
 
 We decided to build a library with every widget in one place. I wanted to go a step further and add a playground, so developers could adjust and export widgets themselves.
 
@@ -34,6 +34,8 @@ The hardest part was the playground, and making sure every widget ran correctly 
 - **Documentation.** I wrote general docs on how to build and use a widget, plus a page for every widget, so other developers could work without me.
 
 <div class="shots">
+
+![The playground's list of all the widgets, open beside a search widget](../../assets/case-studies/widget-library/wl-widget-drawer.png)
 
 ![A search widget in the playground with its exported code](../../assets/case-studies/widget-library/wl-irae-search-code.png)
 
